@@ -1,4 +1,4 @@
-package eth-trans-service
+package transservice
 
 type Transaction struct{
 	SenderAddr		string
