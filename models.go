@@ -6,4 +6,9 @@ type Transaction struct{
 	AmountWei 		string
 }
 
+type NewTransactionRequest struct{
+	SenderWallet	string
+	ReceiverWallet  string
+	Amount 			string
+}
 

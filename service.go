@@ -1,9 +1,19 @@
-package transservice
+ package transservice
+ import(
+ 	"crypto/ecdsa"
+
+  	"github.com/ethereum/go-ethereum/crypto"
+    "github.com/go"
+ )
  
-func  CreateTransaction(sender string, receiver string, amount string) *Transaction{ 
+func  CreateTransaction(req NewTransactionRequest) *Transaction{ 
 	return &Transaction{
-		SenderAddr: sender,
-		ReceiverAddr: receiver,
-		AmountWei: amount,
+		SenderAddr: req.SenderWallet,
+		ReceiverAddr: req.ReceiverWallet,
+		AmountWei: req.Amount,
 	}
 }
+
+func SignTransaction(t *Transaction, p privateKey, chainID int) *types.Transaction{
+	
+} 
