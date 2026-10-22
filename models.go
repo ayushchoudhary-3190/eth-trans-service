@@ -1,5 +1,7 @@
 package transservice
 
+import "github.com/ethereum/go-ethereum/common"
+
 type Transaction struct{
 	SenderAddr		string
 	ReceiverAddr	string
@@ -7,8 +9,8 @@ type Transaction struct{
 }
 
 type NewTransactionRequest struct{
-	SenderWallet	string
-	ReceiverWallet  string
+	SenderWallet	*common.Address
+	ReceiverWallet  *common.Address
 	Amount 			string
 }
 
