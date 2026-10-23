@@ -16,7 +16,7 @@ func  CreateTransaction(req NewTransactionRequest) *Transaction{
 	}
 }
 
-func SignTransaction(t *Transaction, p privateKey, chainID *big.Int) *types.Transaction{
+func SignTransaction(t *Transaction, p privateKey, chainID *big.Int) (*types.Transaction,error){
 	tx := types.NewTx(&types.DynamicFeeTx{
 		ChainID : chainID,
 		GasFeeCap : gasFeeCap,
@@ -27,5 +27,10 @@ func SignTransaction(t *Transaction, p privateKey, chainID *big.Int) *types.Tran
 		Value	  : t.AmountWei,
 	})
 
-	
+	signer := types.LatestSignerForChainID(chainID)
+	signedTx,err := types.SignTx(tx,signer,p)
+	if err != nil{
+		return nil,err
+	}
+	return signedTx,nil
 } 
