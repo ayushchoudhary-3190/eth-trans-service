@@ -1,11 +1,13 @@
 package transservice
 
 import (
+	"context"
 	"crypto/ecdsa"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
  
 func  CreateTransaction(req NewTransactionRequest) *Transaction{ 
@@ -34,3 +36,14 @@ func SignTransaction(t *Transaction, p privateKey, chainID *big.Int) (*types.Tra
 	}
 	return signedTx,nil
 } 
+
+
+func BroadcastTransaction(ctx context.Context,signedTx *types.Transaction,client *ethclient.Client) error{
+	err := client.SendTransaction(ctx,signedTx)
+	
+	if err != nil{
+		return err
+	}
+
+	return nil
+}
